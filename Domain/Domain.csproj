@@ -39,6 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessRules\CustomerLevelUpRule.cs" />
+    <Compile Include="BusinessRules\CannotLevelUpPaymentRule.cs" />
+    <Compile Include="BusinessRules\ILevelUpPaymentRule.cs" />
     <Compile Include="Payment.cs" />
     <Compile Include="PaymentStatus.cs" />
     <Compile Include="User.cs" />

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Domain.BusinessRules;
 
 namespace Domain
 {
@@ -8,14 +9,32 @@ namespace Domain
     /// </summary>
     public class User
     {
-        public int Id { get; set; }
+        private readonly ILevelUpPaymentRule levelUpRule;
 
-        public string Name { get; set; }
+        public User(int id, string name, UserType userType, UserStatus userStatus, List<Payment> payments, ILevelUpPaymentRule levelUpRule)
+        {
+            Id = id;
+            Name = name;
+            UserType = userType;
+            UserStatus = userStatus;
+            Payments = payments;
 
-        public UserType UserType { get; set; }
+            this.levelUpRule = levelUpRule;
+        }
 
-        public UserStatus UserStatus { get; set; }
+        public int Id { get; }
 
-        public List<Payment> Payments { get; set; }
+        public string Name { get; }
+
+        private UserType UserType { get; }
+
+        public UserStatus UserStatus { get; }
+
+        public List<Payment> Payments { get; }
+
+        public bool LevelUp(List<Payment> payments)
+        {
+            return levelUpRule.CanLevelUp(payments);
+        }
     }
 }
